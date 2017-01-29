@@ -10,9 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.raizlabs.android.dbflow.sql.language.SQLite;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import org.apache.commons.io.FileUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,7 +37,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        readFile();
+//        List<TodoItem> ormItems = SQLite.select().from(TodoItem.class).queryList();
+//        for (TodoItem ormItem : ormItems) {
+//            ormItem.delete();
+//        }
+
+        // readFile();
+        readUsingORM();
         setContentView(R.layout.activity_main);
         lvItems = (ListView) findViewById(R.id.lvItems);
         itemsAdapater = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
@@ -47,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        writeFile();
+        // writeFile();
+        writeUsingORM();
     }
 
     private void setupClickViewListener() {
@@ -57,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                         items.remove(position);
                         itemsAdapater.notifyDataSetChanged();
-                        writeFile();
+                        // writeFile();
+                        writeUsingORM();
                         return true;
                     }
                 }
@@ -84,7 +97,8 @@ public class MainActivity extends AppCompatActivity {
         String text = editText.getText().toString();
         itemsAdapater.add(text);
         editText.setText("");
-        writeFile();
+        // writeFile();
+        writeUsingORM();
     }
 
     private void readFile() {
@@ -108,6 +122,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void writeUsingORM() {
+
+        Random rand = new Random();
+        TodoDatabase database = new TodoDatabase();
+
+        int ix = 0;
+        for (String item : items) {
+            TodoItem itemRow = new TodoItem();
+            itemRow.identifier = ix; //rand.nextInt();
+            itemRow.item = item;
+            itemRow.save();
+            ix+=1;
+        }
+    }
+
+    private void readUsingORM() {
+        List<TodoItem> ormItems = SQLite.select().from(TodoItem.class).queryList();
+        items = new ArrayList<String>();
+        for (TodoItem ormItem : ormItems) {
+            items.add(ormItem.item);
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -116,7 +153,8 @@ public class MainActivity extends AppCompatActivity {
             int pos = data.getIntExtra(SELECTED_POSISTION, 0);
             items.set(pos, savedText);
             itemsAdapater.notifyDataSetChanged();
-            writeFile();
+            // writeFile();
+            writeUsingORM();
         }
     }
 }

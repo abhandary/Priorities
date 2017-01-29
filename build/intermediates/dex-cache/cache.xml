@@ -2,85 +2,103 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
+        is-multidex="false"
+        jar="/Users/akshayb/.gradle/caches/modules-2/files-2.1/com.github.Raizlabs.DBFlow/dbflow-core/3.1.1/f205bcc63da15f536f333e1c82de622fdbb35956/dbflow-core-3.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="f205bcc63da15f536f333e1c82de622fdbb35956">
+        <dex dex="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/dbflow-core-3.1.1_f7e8d2ff93d68a0b684a50a117f48dc420ba8165.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Applications/Android Studio.app/Contents/gradle/m2repository/commons-io/commons-io/2.4/commons-io-2.4.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
-        <dex dex="/Users/akshayb/code/SimpleTodo/app/build/intermediates/transforms/dex/debug/folders/1000/10/commons-io-2.4_db9d9c7f5dc9abc44c05f9a56b43532b2a4af315/classes.dex" />
+        <dex dex="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/commons-io-2.4_db9d9c7f5dc9abc44c05f9a56b43532b2a4af315.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/akshayb/code/SimpleTodo/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        is-multidex="false"
+        jar="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="06b8665d9db8b94e0f8ef34b854b82865ea791ef">
-        <dex dex="/Users/akshayb/code/SimpleTodo/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_49303b27cc1813867eee6a5ea8291724ab43b57c/classes.dex" />
+        sha1="de5a4d304b2db86899c2f8e9cf11feb3e2b0fcb7">
+        <dex dex="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_2ad9adca41d5f7b1144f1a207d532f9ed0d0ec3d.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/akshayb/code/SimpleTodo/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="/Users/akshayb/code/SimpleTodo/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_44dd4bb443bd92d52b74816d1ba0b394cab482f0/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/akshayb/code/SimpleTodo/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        is-multidex="false"
+        jar="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="/Users/akshayb/code/SimpleTodo/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_a7899a48152f18759d1a79851e1502275f45e28b/classes.dex" />
+        <dex dex="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.4.0_f01300ff3e3b235ff3d9ff037e3751fc44ffd0bb.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/akshayb/code/SimpleTodo/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        is-multidex="false"
+        jar="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.4.0_1c300f4388f4c4e13d434ceab8f9b8f0f5e86ae6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
-        <dex dex="/Users/akshayb/code/SimpleTodo/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_d26ef0ee5c8fc262f0ed4fd544ed747c180d880b/classes.dex" />
+        <dex dex="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.4.0_3ff20df78abe7170a86dd17fbe452aa93cdd0489.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/akshayb/code/SimpleTodo/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="09f327ac0fd3794ea8c8ae5a7d8e284e912e7bef">
-        <dex dex="/Users/akshayb/code/SimpleTodo/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_112280240220a2e3daa9d655e598f5ca20f1d8e7/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
+        is-multidex="false"
         jar="/Users/akshayb/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
-        <dex dex="/Users/akshayb/code/SimpleTodo/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_1de00442242c30f86505dcd36b7812a20c89540a/classes.dex" />
+        <dex dex="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/support-annotations-23.4.0_1de00442242c30f86505dcd36b7812a20c89540a.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/akshayb/code/SimpleTodo/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        is-multidex="false"
+        jar="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/exploded-aar/com.github.Raizlabs.DBFlow/dbflow/3.1.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
-        <dex dex="/Users/akshayb/code/SimpleTodo/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_810d564ac205f098f0d5ac65331bf21bb72d8e6b/classes.dex" />
+        sha1="58342b97007b49e4a536bdd30b9c3928be81ae59">
+        <dex dex="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/com.github.Raizlabs.DBFlow-dbflow-3.1.1_776ecfc1a90c0c317550afad85c5d7e056ebd470.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/akshayb/code/SimpleTodo/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        is-multidex="false"
+        jar="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
-        <dex dex="/Users/akshayb/code/SimpleTodo/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_83fd6c1dde915c0352f25aafe0adc224fc07267a/classes.dex" />
+        <dex dex="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/internal_impl-23.4.0_2223291afecbfa571fdb47a9d352b502917b5969.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="f6d391ed91f381c272f39babd52e370f78d2cdbe">
+        <dex dex="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/instant-run_60f732d5e84bedfa947fc913d8a6b67c60097ead.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/Users/akshayb/code/everything_else/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.4.0_3f1524b8d93a293117654f8bae6cf1005315facc.jar" />
     </item>
 
 </items>
