@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         itemsAdapater.add(text);
         editText.setText("");
         // writeFile();
-        writeUsingORM();
+        writeUsingORMAtPosition(items.size() - 1);
     }
 
     private void readFile() {
@@ -124,18 +124,32 @@ public class MainActivity extends AppCompatActivity {
 
     private void writeUsingORM() {
 
-        Random rand = new Random();
-        TodoDatabase database = new TodoDatabase();
-
         int ix = 0;
         for (String item : items) {
             TodoItem itemRow = new TodoItem();
-            itemRow.identifier = ix; //rand.nextInt();
+            itemRow.identifier = ix;
             itemRow.item = item;
             itemRow.save();
             ix+=1;
         }
     }
+
+    private void writeUsingORMAtPosition(int pos) {
+
+        TodoItem itemRow = new TodoItem();
+        itemRow.identifier = pos;
+        itemRow.item = items.get(pos);
+        itemRow.save();
+    }
+
+    private void removeUsingORMAtPosition(int pos) {
+
+        TodoItem itemRow = new TodoItem();
+        itemRow.identifier = pos;
+        itemRow.item = items.get(pos);
+        itemRow.delete();
+    }
+
 
     private void readUsingORM() {
         List<TodoItem> ormItems = SQLite.select().from(TodoItem.class).queryList();
@@ -154,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
             items.set(pos, savedText);
             itemsAdapater.notifyDataSetChanged();
             // writeFile();
-            writeUsingORM();
+            writeUsingORMAtPosition(pos);
         }
     }
 }
