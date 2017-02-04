@@ -1,5 +1,6 @@
 package com.example.akshayb.simpletodo.fragments;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -38,6 +39,7 @@ public class DatePickerFragment extends DialogFragment {
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         // Create a new instance of TimePickerDialog and return it
-        return new DatePickerDialog(getActivity(), ondateSet, year, month, day);
+
+        return new DatePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT, ondateSet, year, month, day);
     }
 }

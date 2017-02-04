@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:id="@+id/tvTaskLabel"
+        android:text="@string/button_cancel"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:layout_width="wrap_content"
+        android:layout_weight=".50"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/etDate"
+        android:inputType="date"
+        android:text="@string/button_save"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:maxLines="1"
+        android:layout_width="wrap_content"
+        android:layout_weight=".50"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_height="wrap_content" />
+</LinearLayout>

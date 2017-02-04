@@ -7,8 +7,10 @@
         android:text="Task Name"
         android:textStyle="bold"
         android:maxLines="1"
+        android:hint="@string/task_name_hint"
+        android:layout_gravity="center"
         android:layout_width="0dp"
-        android:layout_weight=".50"
+        android:layout_weight=".30"
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
         android:layout_height="wrap_content" />
@@ -20,7 +22,7 @@
         android:layout_gravity="end"
         android:maxLines="1"
         android:layout_width="0dp"
-        android:layout_weight=".50"
+        android:layout_weight=".70"
         android:layout_marginRight="20dp"
         android:layout_marginEnd="20dp"
         android:layout_height="wrap_content" />

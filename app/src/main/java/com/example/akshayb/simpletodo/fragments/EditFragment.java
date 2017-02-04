@@ -21,11 +21,13 @@ import com.example.akshayb.simpletodo.models.TodoItem_Table;
 import com.example.akshayb.simpletodo.adapters.Task;
 import com.example.akshayb.simpletodo.adapters.TaskArrayAdapter;
 import com.example.akshayb.simpletodo.models.TodoItem;
+import com.raizlabs.android.dbflow.converter.CalendarConverter;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -97,18 +99,25 @@ public class EditFragment extends DialogFragment {
 
     private void setupListView(View view) {
 
-        TodoItem ormItem = SQLite.select().from(TodoItem.class).where(TodoItem_Table.identifier.is(pos)).querySingle();
-        lvTasks = (ListView) view.findViewById(R.id.lvItems);
-
 
         tasksContent = new ArrayList<Object>();
-        tasksContent.add(ormItem.getTaskName());
-//        tasksContent.add(getStringFromDueDate(ormItem.getDueDate()));
-        tasksContent.add(ormItem.getDueDate());
-        tasksContent.add(ormItem.getNotes());
-        tasksContent.add(stringFromPriority(ormItem.getPriority()));
-        tasksContent.add(stringFromStatus(ormItem.getStatus()));
+        lvTasks = (ListView) view.findViewById(R.id.lvItems);
 
+        if (pos == -1) {
+            tasksContent.add("");
+            tasksContent.add(Calendar.getInstance().getTime());
+            tasksContent.add("");
+            tasksContent.add("");
+            tasksContent.add("");
+        }
+        else {
+            TodoItem ormItem = SQLite.select().from(TodoItem.class).where(TodoItem_Table.identifier.is(pos)).querySingle();
+            tasksContent.add(ormItem.getTaskName());
+            tasksContent.add(ormItem.getDueDate());
+            tasksContent.add(ormItem.getNotes());
+            tasksContent.add(stringFromPriority(ormItem.getPriority()));
+            tasksContent.add(stringFromStatus(ormItem.getStatus()));
+        }
         adapter = new TaskArrayAdapter(getContext(), tasksContent, getFragmentManager());
 
         lvTasks.setAdapter(adapter);
@@ -129,18 +138,6 @@ public class EditFragment extends DialogFragment {
 //                startActivity(intent);
             }
         });
-
-//        gvResults.setOnScrollListener(new EndlessScrollListener() {
-//            @Override
-//            public boolean onLoadMore(int page, int totalItemsCount) {
-//                // Triggered only when new data needs to be appended to the list
-//                // Add whatever code is needed to append new items to your AdapterView
-//                loadNextDataFromApi(page, queryString);
-//                // or loadNextDataFromApi(totalItemsCount);
-//                return true; // ONLY if more data is actually being loaded; false otherwise.
-//            }
-//        });
-
     }
 
     String stringFromPriority(Task.TaskPriority priority) {

@@ -38,6 +38,7 @@ import static com.example.akshayb.simpletodo.R.id.etDate;
 public class TaskArrayAdapter extends ArrayAdapter<Object> {
 
     FragmentManager fragmentManager;
+    EditText etDate;
 
     public TaskArrayAdapter(Context context, List<Object> objects, FragmentManager lclFragmentManager) {
         super(context, android.R.layout.simple_list_item_1, objects);
@@ -92,19 +93,27 @@ public class TaskArrayAdapter extends ArrayAdapter<Object> {
 
                 // set the text and content for the 'Task Name' row
                 tvLabel.setText(getContext().getString(R.string.lbl_due_date));
-                EditText etDate = (EditText) convertView.findViewById(R.id.etDate);
-
-
-                etDate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        DatePickerFragment newFragment = new DatePickerFragment();
-                        newFragment.setOndateSet(ondate);
-//                        FragmentTransaction transaction = fragmentManager.beginTransaction();
-//                        transaction.add(R.id.fragment_date_picker, videoFragment).commit();
-                        newFragment.show(fragmentManager, "datePicker");
-                    }
-                });
+//                etDate = (EditText) convertView.findViewById(R.id.etDate);
+//
+//                Date dateToSet = onDate;
+//                if (onDate == null) {
+//                    Calendar cal = new GregorianCalendar();
+//                    dateToSet = cal.getTime();
+//                }
+//                SimpleDateFormat dateF = new SimpleDateFormat("EEE, d MMM yyyy", Locale.getDefault());
+//                String date =  dateF.format(dateToSet);
+//                etDate.setText(date);
+//
+//                etDate.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        DatePickerFragment newFragment = new DatePickerFragment();
+//                        newFragment.setOndateSet(ondate);
+////                        FragmentTransaction transaction = fragmentManager.beginTransaction();
+////                        transaction.add(R.id.fragment_date_picker, videoFragment).commit();
+//                        newFragment.show(fragmentManager, "datePicker");
+//                    }
+//                });
 
 //                tvText.setText(taskContent);
 
@@ -121,9 +130,6 @@ public class TaskArrayAdapter extends ArrayAdapter<Object> {
                 // set the text and content for the 'Task Name' row
                 tvLabel.setText(getContext().getString(R.string.lbl_notes));
                 tvText.setText(taskContent);
-
-//                viewHolder.tvLabel.setText(getContext().getString(R.string.lbl_notes));
-//                viewHolder.tvText.setText(task.getNotes());
                 break;
             case 3:
                 taskContent = (String) getItem(position);
@@ -142,10 +148,6 @@ public class TaskArrayAdapter extends ArrayAdapter<Object> {
                 // set the text and content for the 'Task Name' row
                 tvLabel.setText(getContext().getString(R.string.lbl_priority));
 
-//                tvText.setText(taskContent);
-
-//                viewHolder.tvLabel.setText(getContext().getString(R.string.lbl_priority));
-//                viewHolder.tvText.setText(stringFromPriority(task.getPriority()));
                 break;
             case 4:
                 taskContent = (String) getItem(position);
@@ -164,8 +166,6 @@ public class TaskArrayAdapter extends ArrayAdapter<Object> {
                 // set the text and content for the 'Task Name' row
                 tvLabel.setText(getContext().getString(R.string.lbl_status));
 
-//                viewHolder.tvLabel.setText(getContext().getString(R.string.lbl_status));
-//                viewHolder.tvText.setText(stringFromStatus(task.getStatus()));
                 break;
         }
 
@@ -180,7 +180,7 @@ public class TaskArrayAdapter extends ArrayAdapter<Object> {
             String date =  dateF.format(cal.getTime());
 
 //            beginDate = cal.getTime();
-//            etDate.setText(date);
+            etDate.setText(date);
             Log.d("DEBUG", year + "" + month + "" + dayOfMonth + "");
         }
     };

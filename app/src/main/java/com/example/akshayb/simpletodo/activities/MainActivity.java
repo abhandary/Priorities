@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
     ArrayAdapter<String> itemsAdapater;
     ListView             lvItems;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,11 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
 //        for (TodoItem ormItem : ormItems) {
 //            ormItem.delete();
 //        }
+
+        // setup toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
 
         // readFile();
         readUsingORM();
@@ -100,12 +107,12 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
     }
 
     public void onAddItem(View view) {
-        EditText editText = (EditText) findViewById(R.id.etNewItem);
-        String text = editText.getText().toString();
-        itemsAdapater.add(text);
-        editText.setText("");
-        // writeFile();
-        writeUsingORMAtPosition(items.size() - 1);
+//        EditText editText = (EditText) findViewById(R.id.etNewItem);
+//        String text = editText.getText().toString();
+//        itemsAdapater.add(text);
+//        editText.setText("");
+//        // writeFile();
+//        writeUsingORMAtPosition(items.size() - 1);
     }
 
     private void readFile() {
@@ -183,5 +190,17 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    public void onAddTask(MenuItem item) {
+        FragmentManager fm = getSupportFragmentManager();
+        EditFragment editFragment = EditFragment.newInstance(-1);
+        editFragment.show(fm, EDIT_FRAGMENT);
     }
 }
