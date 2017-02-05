@@ -13,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 import com.example.akshayb.simpletodo.R;
@@ -44,8 +46,10 @@ public class EditFragment extends DialogFragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String POSITION = "position";
+    private static final String IS_NEW_TASK = "is_new_task";
 
-    private int pos;
+    private int     pos;
+    private boolean isNewItem;
 
     List<Object> tasksContent;
 
@@ -66,10 +70,11 @@ public class EditFragment extends DialogFragment {
      * @return A new instance of fragment EditFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EditFragment newInstance(int pos) {
+    public static EditFragment newInstance(int pos, boolean isNewItem) {
         EditFragment fragment = new EditFragment();
         Bundle args = new Bundle();
         args.putInt(POSITION, pos);
+        args.putBoolean(IS_NEW_TASK, isNewItem);
         fragment.setArguments(args);
         return fragment;
     }
@@ -79,6 +84,7 @@ public class EditFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             pos = getArguments().getInt(POSITION);
+            isNewItem = getArguments().getBoolean(IS_NEW_TASK);
         }
     }
 
@@ -103,41 +109,23 @@ public class EditFragment extends DialogFragment {
         tasksContent = new ArrayList<Object>();
         lvTasks = (ListView) view.findViewById(R.id.lvItems);
 
-        if (pos == -1) {
+        if (isNewItem) {
             tasksContent.add("");
             tasksContent.add(Calendar.getInstance().getTime());
             tasksContent.add("");
-            tasksContent.add("");
-            tasksContent.add("");
+            tasksContent.add(Task.TaskPriority.TaskPriorityMedium);
+            tasksContent.add(Task.Status.StatusTODO);
         }
         else {
             TodoItem ormItem = SQLite.select().from(TodoItem.class).where(TodoItem_Table.identifier.is(pos)).querySingle();
             tasksContent.add(ormItem.getTaskName());
             tasksContent.add(ormItem.getDueDate());
             tasksContent.add(ormItem.getNotes());
-            tasksContent.add(stringFromPriority(ormItem.getPriority()));
-            tasksContent.add(stringFromStatus(ormItem.getStatus()));
+            tasksContent.add(ormItem.getPriority());
+            tasksContent.add(ormItem.getStatus());
         }
         adapter = new TaskArrayAdapter(getContext(), tasksContent, getFragmentManager());
-
         lvTasks.setAdapter(adapter);
-
-        lvTasks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // 1. create an intent to display the article
-//                Intent intent = new Intent(getApplicationContext(), ArticleActivity.class);
-//
-//                // 2. get the article to display
-//                Article article = articles.get(i);
-//
-//                // 3. pass in that article into the intent
-//                intent.putExtra(ARTICLE_MODEL, Parcels.wrap(article));
-//
-//                // 4. launch the activity
-//                startActivity(intent);
-            }
-        });
     }
 
     String stringFromPriority(Task.TaskPriority priority) {
@@ -208,4 +196,61 @@ public class EditFragment extends DialogFragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+    public void onCancelButtonClicked(View view) {
+        dismiss();
+    }
+
+    public void onSaveButtonClicked(View view) {
+        writeUsingORMAtPosition(pos);
+        dismiss();
+    }
+
+    private void writeUsingORMAtPosition(int pos) {
+
+
+        TodoItem itemRow = new TodoItem();
+
+        // 1. set the unique row identifier which is same as position in task list
+        itemRow.setIdentifier(pos);
+
+        // 2. set the task name.
+        itemRow.setTaskName(adapter.getTvTaskName().toString());
+
+        // 3. set the notes text
+        itemRow.setNotes(adapter.getTvNotes().toString());
+
+        // 4. set the priority
+        switch (adapter.getSpPriority().getSelectedItemPosition()) {
+            case 0:
+                itemRow.setPriority(Task.TaskPriority.TaskPriorityHigh);
+                break;
+            case 1:
+                itemRow.setPriority(Task.TaskPriority.TaskPriorityMedium);
+                break;
+            default:
+                itemRow.setPriority(Task.TaskPriority.TaskPriorityLow);
+                break;
+        }
+        switch (adapter.getSpStatus().getSelectedItemPosition()) {
+            case 0:
+                itemRow.setStatus(Task.Status.StatusTODO);
+                break;
+            default:
+                itemRow.setStatus(Task.Status.StatusDone);
+                break;
+        }
+
+        // 5. set the due date.
+        Calendar cal = Calendar.getInstance();
+        DatePicker dp = adapter.getDpDate();
+        cal.set(dp.getYear(), dp.getMonth(), dp.getDayOfMonth());
+        itemRow.setDueDate(cal.getTime());
+
+        // 6. add a new row or update an existing row.
+        itemRow.save();
+    }
+
+
 }

@@ -6,6 +6,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static android.R.attr.id;
+import static com.example.akshayb.simpletodo.R.string.priority_high;
+import static java.security.AccessController.getContext;
+
 
 /**
  * Created by akshayb on 1/28/17.
@@ -16,9 +20,9 @@ import java.util.Date;
 
 public class Task {
     public enum TaskPriority {
-        TaskPriorityLow,
+        TaskPriorityHigh,
         TaskPriorityMedium,
-        TaskPriorityHigh
+        TaskPriorityLow;
     }
 
     public enum Status {

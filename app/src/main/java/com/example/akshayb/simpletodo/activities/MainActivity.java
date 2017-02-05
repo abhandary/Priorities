@@ -48,14 +48,15 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
 //            ormItem.delete();
 //        }
 
-        // setup toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
 
         // readFile();
         readUsingORM();
         setContentView(R.layout.activity_main);
+
+        // setup toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         lvItems = (ListView) findViewById(R.id.lvItems);
         itemsAdapater = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
         lvItems.setAdapter(itemsAdapater);
@@ -72,6 +73,13 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
         // writeFile();
         writeUsingORM();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
 
     private void setupClickViewListener() {
         lvItems.setOnItemLongClickListener(
@@ -190,12 +198,6 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
     @Override
     public void onFragmentInteraction(Uri uri) {
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
     }
 
     public void onAddTask(MenuItem item) {
