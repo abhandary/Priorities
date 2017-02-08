@@ -2,28 +2,27 @@ package com.example.akshayb.simpletodo.fragments;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 
 import com.example.akshayb.simpletodo.R;
 import com.example.akshayb.simpletodo.models.TodoItem_Table;
 import com.example.akshayb.simpletodo.adapters.Task;
-import com.example.akshayb.simpletodo.adapters.TaskArrayAdapter;
+import com.example.akshayb.simpletodo.adapters.EditTaskFragmentArrayAdapter;
 import com.example.akshayb.simpletodo.models.TodoItem;
-import com.raizlabs.android.dbflow.converter.CalendarConverter;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.text.DateFormat;
@@ -32,6 +31,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static com.example.akshayb.simpletodo.adapters.Task.Status.StatusDone;
+import static com.example.akshayb.simpletodo.adapters.Task.TaskPriority.TaskPriorityHigh;
+import static com.example.akshayb.simpletodo.adapters.Task.TaskPriority.TaskPriorityLow;
+import static com.example.akshayb.simpletodo.models.TodoItem_Table.status;
 
 
 /**
@@ -54,9 +58,16 @@ public class EditFragment extends DialogFragment {
     List<Object> tasksContent;
 
     ListView lvTasks;
-    TaskArrayAdapter adapter;
+
+    View view;
 
     private OnFragmentInteractionListener mListener;
+
+    EditText   etTaskName;
+    EditText   etNotes;
+    DatePicker datePicker;
+    Spinner    spStatus;
+    Spinner    spPriority;
 
     public EditFragment() {
         // Required empty public constructor
@@ -85,6 +96,7 @@ public class EditFragment extends DialogFragment {
         if (getArguments() != null) {
             pos = getArguments().getInt(POSITION);
             isNewItem = getArguments().getBoolean(IS_NEW_TASK);
+
         }
     }
 
@@ -93,9 +105,24 @@ public class EditFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_edit, null);
+        view = getActivity().getLayoutInflater().inflate(R.layout.fragment_edit, null);
 
-        setupListView(view);
+        Button saveButton = (Button) view.findViewById(R.id.btnSave);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSaveButtonClicked();
+            }
+        });
+        Button cancelButton = (Button) view.findViewById(R.id.btnCancel);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCancelButtonClicked();
+            }
+        });
+
+        setupTask(view);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setView(view);
@@ -103,34 +130,91 @@ public class EditFragment extends DialogFragment {
         return builder.create();
     }
 
-    private void setupListView(View view) {
+    private void setupTask(View view) {
+
+        // 1. set the views
+        etTaskName   = (EditText) view.findViewById(R.id.tvTaskNameContent);
+        datePicker   = (DatePicker) view.findViewById(R.id.dpDate);
+        etNotes      = (EditText)  view.findViewById(R.id.etTaskNotesContent);
+        spStatus     = (Spinner) view.findViewById(R.id.spStatus);
+        spPriority   = (Spinner) view.findViewById(R.id.spPriority);
+
+        // 2. set task name label
+        TextView tvTaskLabel = (TextView) view.findViewById(R.id.tvTaskLabel);
+        tvTaskLabel.setText(getString(R.string.lbl_task_name));
+
+        // 3. set the Due Date Label
+        TextView tvDueDateLabel = (TextView) view.findViewById(R.id.tvDatePicker);
+        tvDueDateLabel.setText(getString(R.string.lbl_due_date));
+
+        // 4. Set the Notes Label
+        TextView tvNotesLabel = (TextView) view.findViewById(R.id.tvTaskNotesLabel);
+        tvNotesLabel.setText(getString(R.string.lbl_notes));
+
+        // 5. Set the Priority Label
+        TextView tvPriorityLabel = (TextView) view.findViewById(R.id.tvPriorityLabel);
+        tvPriorityLabel.setText(getString(R.string.lbl_priority));
+
+        // 6. Set the status spinner items
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.spinner_priority_items, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spPriority.setAdapter(adapter);
+
+        // 7. Set the Status Label
+        TextView tvStatusLabel = (TextView) view.findViewById(R.id.tvStatusLabel);
+        tvStatusLabel.setText(getString(R.string.lbl_status));
+
+        // 8. Set the status spinner items
+        adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.spinner_status_items, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spStatus.setAdapter(adapter);
 
 
-        tasksContent = new ArrayList<Object>();
-        lvTasks = (ListView) view.findViewById(R.id.lvItems);
 
-        if (isNewItem) {
-            tasksContent.add("");
-            tasksContent.add(Calendar.getInstance().getTime());
-            tasksContent.add("");
-            tasksContent.add(Task.TaskPriority.TaskPriorityMedium);
-            tasksContent.add(Task.Status.StatusTODO);
-        }
-        else {
+
+        if (isNewItem == false)
+        {
             TodoItem ormItem = SQLite.select().from(TodoItem.class).where(TodoItem_Table.identifier.is(pos)).querySingle();
-            tasksContent.add(ormItem.getTaskName());
-            tasksContent.add(ormItem.getDueDate());
-            tasksContent.add(ormItem.getNotes());
-            tasksContent.add(ormItem.getPriority());
-            tasksContent.add(ormItem.getStatus());
+
+            // 1. set the task name
+            etTaskName.setText(ormItem.getTaskName());
+
+            // 2. set due date
+
+            // 3. set the notes
+            etNotes.setText(ormItem.getNotes());
+
+            // 4. set the priority
+            switch (ormItem.getPriority()) {
+                case TaskPriorityHigh:
+                    spPriority.setSelection(0);
+                    break;
+                case TaskPriorityLow:
+                    spPriority.setSelection(2);
+                    break;
+                default:
+                    spPriority.setSelection(1);
+                    break;
+            }
+
+            // 5. set the status
+
+            switch (ormItem.getStatus()) {
+                case StatusDone:
+                    spStatus.setSelection(1);
+                    break;
+                default:
+                    spStatus.setSelection(0);
+                    break;
+            }
         }
-        adapter = new TaskArrayAdapter(getContext(), tasksContent, getFragmentManager());
-        lvTasks.setAdapter(adapter);
     }
 
     String stringFromPriority(Task.TaskPriority priority) {
 
-        if( priority == Task.TaskPriority.TaskPriorityLow) {
+        if( priority == TaskPriorityLow) {
             return  getContext().getString(R.string.priority_low);
         }
         if (priority == Task.TaskPriority.TaskPriorityMedium) {
@@ -160,9 +244,9 @@ public class EditFragment extends DialogFragment {
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+//        if (mListener != null) {
+//            mListener.onFragmentInteraction(uri);
+//        }
     }
 
     @Override
@@ -194,21 +278,23 @@ public class EditFragment extends DialogFragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(int pos);
     }
 
 
-    public void onCancelButtonClicked(View view) {
+    public void onCancelButtonClicked() {
         dismiss();
     }
 
-    public void onSaveButtonClicked(View view) {
+    public void onSaveButtonClicked() {
         writeUsingORMAtPosition(pos);
+        if (mListener != null) {
+            mListener.onFragmentInteraction(pos);
+        }
         dismiss();
     }
 
-    private void writeUsingORMAtPosition(int pos) {
-
+    private void writeUsingORMAtPosition( int pos) {
 
         TodoItem itemRow = new TodoItem();
 
@@ -216,35 +302,35 @@ public class EditFragment extends DialogFragment {
         itemRow.setIdentifier(pos);
 
         // 2. set the task name.
-        itemRow.setTaskName(adapter.getTvTaskName().toString());
+        itemRow.setTaskName(etTaskName.getText ().toString());
 
         // 3. set the notes text
-        itemRow.setNotes(adapter.getTvNotes().toString());
+        itemRow.setNotes(etNotes.getText().toString());
 
         // 4. set the priority
-        switch (adapter.getSpPriority().getSelectedItemPosition()) {
+        switch (spPriority.getSelectedItemPosition()) {
             case 0:
-                itemRow.setPriority(Task.TaskPriority.TaskPriorityHigh);
+                itemRow.setPriority(TaskPriorityHigh);
                 break;
             case 1:
                 itemRow.setPriority(Task.TaskPriority.TaskPriorityMedium);
                 break;
             default:
-                itemRow.setPriority(Task.TaskPriority.TaskPriorityLow);
+                itemRow.setPriority(TaskPriorityLow);
                 break;
         }
-        switch (adapter.getSpStatus().getSelectedItemPosition()) {
+        switch (spStatus.getSelectedItemPosition()) {
             case 0:
                 itemRow.setStatus(Task.Status.StatusTODO);
                 break;
             default:
-                itemRow.setStatus(Task.Status.StatusDone);
+                itemRow.setStatus(StatusDone);
                 break;
         }
 
         // 5. set the due date.
         Calendar cal = Calendar.getInstance();
-        DatePicker dp = adapter.getDpDate();
+        DatePicker dp = datePicker;
         cal.set(dp.getYear(), dp.getMonth(), dp.getDayOfMonth());
         itemRow.setDueDate(cal.getTime());
 

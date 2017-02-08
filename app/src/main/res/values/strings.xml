@@ -24,6 +24,9 @@
     <string name="task_item_view_holder">TaskItemViewHolder</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_task">Add Task</string>
+    <string name="edit_task">Edit</string>
+    <string name="close_task_view">Close</string>
     <string name="priority_high">High</string>
+    <string name="priority_medium">Medium</string>
     <string name="priority_low">Low</string>
 </resources>

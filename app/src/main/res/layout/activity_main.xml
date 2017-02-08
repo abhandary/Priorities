@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_height="wrap_content"
         app:titleTextColor="@android:color/white"
-        android:background="@color/colorPurpleHeart">
+        android:background="@color/colorMardiGras">
     </android.support.v7.widget.Toolbar>
     <ListView
         android:layout_width="match_parent"

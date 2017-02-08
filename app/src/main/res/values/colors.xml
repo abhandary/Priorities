@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhisper">#F7F5FB</color>
+    <color name="colorSandyBrown">#F4A460</color>
     <color name="colorPurpleHeart">#7242BF</color>
+    <color name="colorMardiGras">#3E2240</color>
 </resources>

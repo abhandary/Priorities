@@ -2,7 +2,6 @@ package com.example.akshayb.simpletodo.activities;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,10 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.akshayb.simpletodo.R;
+import com.example.akshayb.simpletodo.adapters.MainActivityArrayAdapter;
 import com.example.akshayb.simpletodo.fragments.EditFragment;
 import com.example.akshayb.simpletodo.models.TodoItem;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -30,26 +29,19 @@ import org.apache.commons.io.FileUtils;
 public class MainActivity extends AppCompatActivity implements EditFragment.OnFragmentInteractionListener {
 
     private static final int     EDIT_TASK_REQUEST = 1;
-    private static final String  SELECTED_TASK  = "SELECTED_TASK";
     private static final String  SELECTED_POSISTION  = "SELECTED_POSISTION";
     private static final String  SAVED_TASK = "SAVED_TASK";
     private static final String  EDIT_FRAGMENT  = "EDIT_FRAGMENT";
 
-    ArrayList<String>    items;
-    ArrayAdapter<String> itemsAdapater;
-    ListView             lvItems;
+    ArrayList<TodoItem>                items;
+    MainActivityArrayAdapter<TodoItem> itemsAdapater;
+    ListView                           lvItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        List<TodoItem> ormItems = SQLite.select().from(TodoItem.class).queryList();
-//        for (TodoItem ormItem : ormItems) {
-//            ormItem.delete();
-//        }
-
-
-        // readFile();
+        items = new ArrayList<>();
         readUsingORM();
         setContentView(R.layout.activity_main);
 
@@ -58,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
         setSupportActionBar(toolbar);
 
         lvItems = (ListView) findViewById(R.id.lvItems);
-        itemsAdapater = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        itemsAdapater = new MainActivityArrayAdapter<>(this, items);
         lvItems.setAdapter(itemsAdapater);
 
         //items.add("First Item");
@@ -104,14 +96,14 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
     }
 
     private void taskSelected(int posistion) {
-        String task = items.get(posistion);
-//        Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
-//        intent.putExtra(SELECTED_TASK, task);
-//        intent.putExtra(SELECTED_POSISTION, posistion);
-//        startActivityForResult(intent, EDIT_TASK_REQUEST);
-        FragmentManager fm = getSupportFragmentManager();
-        EditFragment editFragment = EditFragment.newInstance(posistion);
-        editFragment.show(fm, EDIT_FRAGMENT);
+        TodoItem task = items.get(posistion);
+        Intent intent = new Intent(MainActivity.this, ViewTaskActivity.class);
+
+        intent.putExtra(SELECTED_POSISTION, posistion);
+        startActivityForResult(intent, EDIT_TASK_REQUEST);
+//        FragmentManager fm = getSupportFragmentManager();
+//        EditFragment editFragment = EditFragment.newInstance(posistion);
+//        editFragment.show(fm, EDIT_FRAGMENT);
     }
 
     public void onAddItem(View view) {
@@ -123,15 +115,15 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
 //        writeUsingORMAtPosition(items.size() - 1);
     }
 
-    private void readFile() {
-        File filesDir = getFilesDir();
-        File todoFile = new File(filesDir, "todo.txt");
-        try {
-            items = new ArrayList<String>(FileUtils.readLines(todoFile));
-        } catch (IOException ex) {
-            items = new ArrayList<String>();
-        }
-    }
+//    private void readFile() {
+//        File filesDir = getFilesDir();
+//        File todoFile = new File(filesDir, "todo.txt");
+//        try {
+//            items = new ArrayList<String>(FileUtils.readLines(todoFile));
+//        } catch (IOException ex) {
+//            items = new ArrayList<String>();
+//        }
+//    }
 
     private void writeFile() {
         File filesDir = getFilesDir();
@@ -147,10 +139,10 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
     private void writeUsingORM() {
 
         int ix = 0;
-        for (String item : items) {
-            TodoItem itemRow = new TodoItem();
-            itemRow.setIdentifier(ix);
-            itemRow.setTaskName(item);
+        for (TodoItem itemRow : items) {
+//            TodoItem itemRow = new TodoItem();
+//            itemRow.setIdentifier(ix);
+//            itemRow.setTaskName(item);
             itemRow.save();
             ix+=1;
         }
@@ -158,9 +150,10 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
 
     private void writeUsingORMAtPosition(int pos) {
 
-        TodoItem itemRow = new TodoItem();
-        itemRow.setIdentifier(pos);
-        itemRow.setTaskName(items.get(pos));
+        TodoItem itemRow = items.get(pos);
+//        new TodoItem();
+//        itemRow.setIdentifier(pos);
+//        itemRow.setTaskName(items.get(pos));
         itemRow.save();
     }
 
@@ -168,17 +161,15 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
 
         TodoItem itemRow = new TodoItem();
         itemRow.setIdentifier(pos);
-        itemRow.setTaskName(items.get(pos));
+//        itemRow.setTaskName(items.get(pos));
         itemRow.delete();
     }
 
 
     private void readUsingORM() {
         List<TodoItem> ormItems = SQLite.select().from(TodoItem.class).queryList();
-        items = new ArrayList<String>();
-        for (TodoItem ormItem : ormItems) {
-            items.add(ormItem.getTaskName());
-        }
+        items.clear();
+        items.addAll(new ArrayList<TodoItem>(ormItems));
     }
 
     @Override
@@ -187,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
         if (requestCode == EDIT_TASK_REQUEST && resultCode == RESULT_OK) {
             String savedText = data.getStringExtra(SAVED_TASK);
             int pos = data.getIntExtra(SELECTED_POSISTION, 0);
-            items.set(pos, savedText);
+//            items.set(pos, savedText);
             itemsAdapater.notifyDataSetChanged();
             // writeFile();
             writeUsingORMAtPosition(pos);
@@ -196,13 +187,14 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
 
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    public void onFragmentInteraction(int pos) {
+        readUsingORM();
+        itemsAdapater.notifyDataSetChanged();
     }
 
     public void onAddTask(MenuItem item) {
         FragmentManager fm = getSupportFragmentManager();
-        EditFragment editFragment = EditFragment.newInstance(-1);
+        EditFragment editFragment = EditFragment.newInstance(this.items.size(), true);
         editFragment.show(fm, EDIT_FRAGMENT);
     }
 }
