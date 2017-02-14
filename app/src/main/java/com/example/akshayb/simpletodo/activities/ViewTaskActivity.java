@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.akshayb.simpletodo.R;
-import com.example.akshayb.simpletodo.adapters.MainActivityArrayAdapter;
 import com.example.akshayb.simpletodo.adapters.ViewTaskActivityArrayAdapter;
 import com.example.akshayb.simpletodo.fragments.EditFragment;
 import com.example.akshayb.simpletodo.models.TodoItem;
@@ -44,12 +43,13 @@ public class ViewTaskActivity extends AppCompatActivity implements EditFragment.
 
         setContentView(R.layout.activity_edit_item);
 
-        // setup toolbar
+        // 1. setup toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         this.taskIdentifier = getIntent().getLongExtra(IDENTIFIER, 0);
 
+        // 2. setup the list adapater
         items = new ArrayList<ViewTaskRow>();
         itemsAdapater = new ViewTaskActivityArrayAdapter<>(this, items);
         lvItems = (ListView) findViewById(R.id.lvTasks);
@@ -62,16 +62,9 @@ public class ViewTaskActivity extends AppCompatActivity implements EditFragment.
             }
         });
 
+        // 3. setup the list for the given task identifier
         updateListForPosistion(this.taskIdentifier);
     }
-
-//    public void onSaveItem(View view) {
-//        Intent result = new Intent();
-//        result.putExtra(SAVED_TASK, edText.getText().toString());
-//        result.putExtra(SELECTED_POSISTION, this.pos);
-//        setResult(RESULT_OK, result);
-//        finish();
-//    }
 
     public void onEditTask(MenuItem item) {
         showEditFragment();
@@ -86,6 +79,7 @@ public class ViewTaskActivity extends AppCompatActivity implements EditFragment.
     public void onClose(MenuItem item) {
 
         if (taskUpdated) {
+            // set the intent result to indicate that there was an update
             Intent result = new Intent();
             setResult(RESULT_OK, result);
         }
@@ -93,17 +87,21 @@ public class ViewTaskActivity extends AppCompatActivity implements EditFragment.
     }
 
     public void onDeleteTask(MenuItem item) {
+
+        // 1. get the task for the given identifier
         TodoItem ormItem
                 = SQLite.select()
                 .from(TodoItem.class)
                 .where(TodoItem_Table.identifier.eq(taskIdentifier))
                 .querySingle();
 
+
+        // 2. delete
         ormItem.delete();
 
+        // 3. set the intent result to indicate there was an update
         Intent result = new Intent();
         setResult(RESULT_OK, result);
-
         finish();
     }
 
@@ -123,7 +121,7 @@ public class ViewTaskActivity extends AppCompatActivity implements EditFragment.
 
     private void updateListForPosistion(long taskIdentifier) {
 
-
+        // 1. get the task
         TodoItem ormItem
                 = SQLite.select()
                 .from(TodoItem.class)
@@ -132,6 +130,7 @@ public class ViewTaskActivity extends AppCompatActivity implements EditFragment.
 
         items.clear();
 
+        // 2. add each task field
         items.add(new ViewTaskRow(getString(R.string.lbl_task_name), ormItem.getTaskName()));
         items.add(new ViewTaskRow(getString(R.string.lbl_priority),
                 TaskUtils.getStringFromPriority(this, ormItem.getPriority())));
@@ -140,6 +139,7 @@ public class ViewTaskActivity extends AppCompatActivity implements EditFragment.
         items.add(new ViewTaskRow(getString(R.string.lbl_notes), ormItem.getNotes()));
         items.add(new ViewTaskRow(getString(R.string.lbl_status), TaskUtils.getStringFromStatus(this, ormItem.getStatus())));
 
+        // 3. notify change
         itemsAdapater.notifyDataSetChanged();
     }
 

@@ -42,18 +42,27 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
         super.onCreate(savedInstanceState);
 
         items = new ArrayList<>();
+
+        // 1. get all the tasks
         readUsingORM();
         setContentView(R.layout.activity_main);
 
-        // setup toolbar
+        // 2. setup toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // 3. set up the list
         lvItems = (ListView) findViewById(R.id.lvItems);
         itemsAdapater = new MainActivityArrayAdapter<>(this, items);
         lvItems.setAdapter(itemsAdapater);
 
-        setupClickViewListener();
+        // 4. setup the listener for the clicks on the list view
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                taskSelected(i);
+            }
+        });
     }
 
     @Override
@@ -68,17 +77,9 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
     }
 
 
-    private void setupClickViewListener() {
-
-        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                taskSelected(i);
-            }
-        });
-    }
-
     private void taskSelected(int posistion) {
+
+        // show the task in the 'View' Activity
         TodoItem task = items.get(posistion);
         Intent intent = new Intent(MainActivity.this, ViewTaskActivity.class);
 
@@ -87,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
     }
 
     private void readUsingORM() {
+
+        // get all the tasks
         List<TodoItem> ormItems = SQLite.select().from(TodoItem.class).queryList();
         items.clear();
         items.addAll(new ArrayList<TodoItem>(ormItems));
@@ -109,6 +112,8 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
     }
 
     public void onAddTask(MenuItem item) {
+
+        // show the edit/add fragment
         FragmentManager fm = getSupportFragmentManager();
         EditFragment editFragment = EditFragment.newInstance(this.items.size(), true);
         editFragment.show(fm, EDIT_FRAGMENT);
