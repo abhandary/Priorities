@@ -3,24 +3,6 @@
 
     <item
         is-multidex="false"
-        jar="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.3"
-        sha1="fcc945a86ebcbf527429acb8216ec7dae2c06417">
-        <dex dex="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-24.2.0_e964efff710193607ef2d2f5e795e706b2b5c79d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/libs/internal_impl-24.2.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.3"
-        sha1="032a4b53def5e2ceedfc2e793b126c0163cfa1dd">
-        <dex dex="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_c30fe7a802de7142b08a1511c04ec20e9697385a.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Applications/Android Studio.app/Contents/gradle/m2repository/commons-io/commons-io/2.4/commons-io-2.4.jar"
         jumboMode="false"
         optimize="true"
@@ -48,12 +30,48 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="6eb9107eb34d2fe2b020662b7fbbec991dcba846">
+        <dex dex="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-24.2.0_6acab658d73a83da25250188f83404f79077dbef.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="24.0.3"
         sha1="f9b41622897665678d31d78e57a361cb0cebcb0d">
         <dex dex="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-24.2.0_4a782250adf94293231727af6346c29948a9cdb5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="f9b41622897665678d31d78e57a361cb0cebcb0d">
+        <dex dex="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-24.2.0_8327d9578716e7a3038af6a64a2206a8760adaa7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="f3ee23ef25c9a8fe3d40246d0b7097267963a612">
+        <dex dex="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-24.2.0_2ebacad87a8de6a39afbdb393783124df8e693d5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="6e02e34594ebe9c0501ffda8dd48497f81b82977">
+        <dex dex="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_284c9c3d607c4df34dbf305e8fb28738363ee62d.jar" />
     </item>
     <item
         is-multidex="false"
@@ -75,6 +93,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="beac40bcc8a320a896dd15f5109cfcaea5e1e0e3">
+        <dex dex="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-24.2.0_d31905dea8126540992336e1abee95da1f55a163.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/akshayb/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.0/support-annotations-24.2.0.jar"
         jumboMode="false"
         optimize="true"
@@ -84,21 +111,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.0/jars/classes.jar"
+        jar="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="24.0.3"
-        sha1="f3ee23ef25c9a8fe3d40246d0b7097267963a612">
-        <dex dex="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-24.2.0_bec285b81dae8e9b0334ad451b83e9902e273112.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.0/jars/libs/internal_impl-24.2.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.3"
-        sha1="771b3cc0e597b54da25f8086ba73180c59c6bc71">
-        <dex dex="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_01525858edbab48ed4aacd93be62ab7a8e779b41.jar" />
+        sha1="c3c638be6e650b165ab9ae144857b64e82787fad">
+        <dex dex="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-24.2.0_04bcb30077ebe97149b605d73d81086cc1baefab.jar" />
     </item>
     <item
         is-multidex="false"
@@ -120,15 +138,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/akshayb/.gradle/caches/modules-2/files-2.1/com.github.Raizlabs.DBFlow/dbflow-core/3.1.1/f205bcc63da15f536f333e1c82de622fdbb35956/dbflow-core-3.1.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.3"
-        sha1="f205bcc63da15f536f333e1c82de622fdbb35956">
-        <dex dex="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/dbflow-core-3.1.1_f7e8d2ff93d68a0b684a50a117f48dc420ba8165.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.0/jars/libs/internal_impl-24.2.0.jar"
         jumboMode="false"
         optimize="true"
@@ -147,6 +156,33 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="60d7b23621d31e6f42f4f76f16af467e57a20cda">
+        <dex dex="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_a32350b5b341b2361605c28cf8be20258c3b1384.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="fcc945a86ebcbf527429acb8216ec7dae2c06417">
+        <dex dex="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-24.2.0_0a976075bdfccca270c534c246c998d38350cd3a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/exploded-aar/com.github.Raizlabs.DBFlow/dbflow/3.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="58342b97007b49e4a536bdd30b9c3928be81ae59">
+        <dex dex="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/pre-dexed/debug/com.github.Raizlabs.DBFlow-dbflow-3.1.1_47d687514edf9b0f32376359f48bfec2849d8e0a.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
@@ -162,6 +198,105 @@
         revision="24.0.3"
         sha1="c84e216d9bf618464d6b9564d71d9a656433e7c4">
         <dex dex="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-24.2.0_f4ca998020f7c1995a1b38e193acb9a0604605f5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="d8bd2268fdcbfd52c76ade65d9900cd8def93a44">
+        <dex dex="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-24.2.0_359af23e088ad5c324df4d07e07163c56973611b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="032a4b53def5e2ceedfc2e793b126c0163cfa1dd">
+        <dex dex="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_2b4fd132941cf09b57b3d74a357ad017b55fc616.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="fcc945a86ebcbf527429acb8216ec7dae2c06417">
+        <dex dex="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-24.2.0_e964efff710193607ef2d2f5e795e706b2b5c79d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="045be695d968dd707691cc55d23746dbf8cf569a">
+        <dex dex="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_b4fdf23b78d0ca9113059750624712c1aa36f496.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="032a4b53def5e2ceedfc2e793b126c0163cfa1dd">
+        <dex dex="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_c30fe7a802de7142b08a1511c04ec20e9697385a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="c84e216d9bf618464d6b9564d71d9a656433e7c4">
+        <dex dex="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-24.2.0_19bbb8657bf2a27552096966fcba5d1a4db6c8d6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="f3ee23ef25c9a8fe3d40246d0b7097267963a612">
+        <dex dex="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-24.2.0_bec285b81dae8e9b0334ad451b83e9902e273112.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="45f5eda279825ff470e3f51019d374d1ef61e000">
+        <dex dex="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-24.2.0_e1cb0191dde2b2fdd012d7f63a5a0d9d7ca84124.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="771b3cc0e597b54da25f8086ba73180c59c6bc71">
+        <dex dex="/Users/akshayb/code/abhandary/new_clone/Priorities/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_83795e2b31cfcc5f2e358ab111b9bcbd40bb0e6a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="771b3cc0e597b54da25f8086ba73180c59c6bc71">
+        <dex dex="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.0_01525858edbab48ed4aacd93be62ab7a8e779b41.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/akshayb/.gradle/caches/modules-2/files-2.1/com.github.Raizlabs.DBFlow/dbflow-core/3.1.1/f205bcc63da15f536f333e1c82de622fdbb35956/dbflow-core-3.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="f205bcc63da15f536f333e1c82de622fdbb35956">
+        <dex dex="/Users/akshayb/code/abhandary/Priorities/app/build/intermediates/pre-dexed/debug/dbflow-core-3.1.1_f7e8d2ff93d68a0b684a50a117f48dc420ba8165.jar" />
     </item>
 
 </items>
