@@ -2,6 +2,7 @@ package com.example.akshayb.simpletodo.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ public class MainActivityArrayAdapter<T extends BaseModel> extends ArrayAdapter<
         TodoItem task = (TodoItem) getItem(position);
 
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-        convertView = layoutInflater.inflate(R.layout.item_view_task, parent, false);
+        convertView = layoutInflater.inflate(R.layout.item_main_task, parent, false);
 
         // 2. get the label and content views
         TextView tvLabel    = (TextView) convertView.findViewById(R.id.tvViewTaskLabel);
@@ -53,6 +54,12 @@ public class MainActivityArrayAdapter<T extends BaseModel> extends ArrayAdapter<
                 tvLabel.setTextColor(parent.getResources().getColor(R.color.colorSandyBrown));
                 tvContent.setTextColor(parent.getResources().getColor(R.color.colorSandyBrown));
                 break;
+        }
+
+        // 4. if task is done strike through the task
+        if (task.getStatus() == Task.Status.StatusDone) {
+            tvLabel.setPaintFlags(tvLabel.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            tvContent.setPaintFlags(tvLabel.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
         return convertView;

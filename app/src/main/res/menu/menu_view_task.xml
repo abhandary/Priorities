@@ -2,7 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_delete"
+        android:onClick="onDeleteTask"
+        android:id="@+id/miDeleteTask"
+        android:title="@string/delete_task">
+    </item>
+    <item
+        app:showAsAction="ifRoom"
         android:icon="@mipmap/ic_edit"
         android:onClick="onEditTask"
         android:id="@+id/miEditTask"

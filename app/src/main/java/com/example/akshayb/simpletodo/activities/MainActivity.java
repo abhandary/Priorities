@@ -19,7 +19,6 @@ import com.example.akshayb.simpletodo.fragments.EditFragment;
 import com.example.akshayb.simpletodo.models.TodoItem;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ import org.apache.commons.io.FileUtils;
 public class MainActivity extends AppCompatActivity implements EditFragment.OnFragmentInteractionListener {
 
     private static final int     EDIT_TASK_REQUEST = 1;
-    private static final String  SELECTED_POSISTION  = "SELECTED_POSISTION";
+    private static final String  IDENTIFIER  = "IDENTIFIER";
     private static final String  SAVED_TASK = "SAVED_TASK";
     private static final String  EDIT_FRAGMENT  = "EDIT_FRAGMENT";
 
@@ -54,17 +53,12 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
         itemsAdapater = new MainActivityArrayAdapter<>(this, items);
         lvItems.setAdapter(itemsAdapater);
 
-        //items.add("First Item");
-        // items.add("Second Item");
         setupClickViewListener();
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        // writeFile();
-        writeUsingORM();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,18 +69,6 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
 
 
     private void setupClickViewListener() {
-        lvItems.setOnItemLongClickListener(
-                new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                        items.remove(position);
-                        itemsAdapater.notifyDataSetChanged();
-                        // writeFile();
-                        writeUsingORM();
-                        return true;
-                    }
-                }
-        );
 
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -100,31 +82,12 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
         TodoItem task = items.get(posistion);
         Intent intent = new Intent(MainActivity.this, ViewTaskActivity.class);
 
-        intent.putExtra(SELECTED_POSISTION, posistion);
+        intent.putExtra(IDENTIFIER, task.getIdentifier());
         startActivityForResult(intent, EDIT_TASK_REQUEST);
-//        FragmentManager fm = getSupportFragmentManager();
-//        EditFragment editFragment = EditFragment.newInstance(posistion);
-//        editFragment.show(fm, EDIT_FRAGMENT);
     }
 
     public void onAddItem(View view) {
-//        EditText editText = (EditText) findViewById(R.id.etNewItem);
-//        String text = editText.getText().toString();
-//        itemsAdapater.add(text);
-//        editText.setText("");
-//        // writeFile();
-//        writeUsingORMAtPosition(items.size() - 1);
     }
-
-//    private void readFile() {
-//        File filesDir = getFilesDir();
-//        File todoFile = new File(filesDir, "todo.txt");
-//        try {
-//            items = new ArrayList<String>(FileUtils.readLines(todoFile));
-//        } catch (IOException ex) {
-//            items = new ArrayList<String>();
-//        }
-//    }
 
     private void writeFile() {
         File filesDir = getFilesDir();
@@ -141,9 +104,6 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
 
         int ix = 0;
         for (TodoItem itemRow : items) {
-//            TodoItem itemRow = new TodoItem();
-//            itemRow.setIdentifier(ix);
-//            itemRow.setTaskName(item);
             itemRow.save();
             ix+=1;
         }
@@ -177,18 +137,14 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == EDIT_TASK_REQUEST && resultCode == RESULT_OK) {
-            String savedText = data.getStringExtra(SAVED_TASK);
-            int pos = data.getIntExtra(SELECTED_POSISTION, 0);
-//            items.set(pos, savedText);
+            readUsingORM();
             itemsAdapater.notifyDataSetChanged();
-            // writeFile();
-            writeUsingORMAtPosition(pos);
         }
     }
 
 
     @Override
-    public void onFragmentInteraction(int pos) {
+    public void onFragmentInteraction(long identifier) {
         readUsingORM();
         itemsAdapater.notifyDataSetChanged();
     }

@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(database =  TodoDatabase.class)
 public class TodoItem extends BaseModel {
 
-    public int getIdentifier() {
+    public long getIdentifier() {
         return identifier;
     }
 
@@ -38,7 +38,7 @@ public class TodoItem extends BaseModel {
         return notes;
     }
 
-    public void setIdentifier(int identifier) {
+    public void setIdentifier(long identifier) {
         this.identifier = identifier;
     }
 
@@ -64,7 +64,7 @@ public class TodoItem extends BaseModel {
 
     @Column
     @PrimaryKey
-    int identifier;
+    long identifier;
 
     @Column
     String taskName;

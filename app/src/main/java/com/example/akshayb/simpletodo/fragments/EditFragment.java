@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,12 +17,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.akshayb.simpletodo.R;
 import com.example.akshayb.simpletodo.models.TodoItem_Table;
 import com.example.akshayb.simpletodo.adapters.Task;
-import com.example.akshayb.simpletodo.adapters.EditTaskFragmentArrayAdapter;
 import com.example.akshayb.simpletodo.models.TodoItem;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
@@ -49,10 +50,10 @@ import static com.example.akshayb.simpletodo.models.TodoItem_Table.status;
 public class EditFragment extends DialogFragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String POSITION = "position";
+    private static final String IDENTIFIER = "identifier";
     private static final String IS_NEW_TASK = "is_new_task";
 
-    private int     pos;
+    private long    identifier;
     private boolean isNewItem;
 
     List<Object> tasksContent;
@@ -77,14 +78,14 @@ public class EditFragment extends DialogFragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param pos position of the task in the list
+     * @param identifier identifier for the task item
      * @return A new instance of fragment EditFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EditFragment newInstance(int pos, boolean isNewItem) {
+    public static EditFragment newInstance(long identifier, boolean isNewItem) {
         EditFragment fragment = new EditFragment();
         Bundle args = new Bundle();
-        args.putInt(POSITION, pos);
+        args.putLong(IDENTIFIER, identifier);
         args.putBoolean(IS_NEW_TASK, isNewItem);
         fragment.setArguments(args);
         return fragment;
@@ -94,7 +95,7 @@ public class EditFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            pos = getArguments().getInt(POSITION);
+            identifier = getArguments().getLong(IDENTIFIER);
             isNewItem = getArguments().getBoolean(IS_NEW_TASK);
 
         }
@@ -176,7 +177,7 @@ public class EditFragment extends DialogFragment {
 
         if (isNewItem == false)
         {
-            TodoItem ormItem = SQLite.select().from(TodoItem.class).where(TodoItem_Table.identifier.is(pos)).querySingle();
+            TodoItem ormItem = SQLite.select().from(TodoItem.class).where(TodoItem_Table.identifier.is(identifier)).querySingle();
 
             // 1. set the task name
             etTaskName.setText(ormItem.getTaskName());
@@ -209,6 +210,12 @@ public class EditFragment extends DialogFragment {
                     spStatus.setSelection(0);
                     break;
             }
+        } else {
+            // 1. set a default priority of medium
+            spPriority.setSelection(1);
+
+            // 2. set a default status of TO-DO
+            spStatus.setSelection(0);
         }
     }
 
@@ -278,7 +285,7 @@ public class EditFragment extends DialogFragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(int pos);
+        void onFragmentInteraction(long identifier);
     }
 
 
@@ -287,19 +294,33 @@ public class EditFragment extends DialogFragment {
     }
 
     public void onSaveButtonClicked() {
-        writeUsingORMAtPosition(pos);
+
+        if (etTaskName.getText().toString().trim().length() == 0) {
+
+            Context context = view.getContext();
+            CharSequence text = "Please Enter a Task Name";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            return;
+        }
+        if (isNewItem) {
+            identifier = System.currentTimeMillis();
+        }
+        writeUsingORMAtPosition(identifier);
         if (mListener != null) {
-            mListener.onFragmentInteraction(pos);
+            mListener.onFragmentInteraction(identifier);
         }
         dismiss();
     }
 
-    private void writeUsingORMAtPosition( int pos) {
+    private void writeUsingORMAtPosition( long identifier) {
 
         TodoItem itemRow = new TodoItem();
 
-        // 1. set the unique row identifier which is same as position in task list
-        itemRow.setIdentifier(pos);
+        // 1. set the unique identifier for this task item
+        itemRow.setIdentifier(identifier);
 
         // 2. set the task name.
         itemRow.setTaskName(etTaskName.getText ().toString());

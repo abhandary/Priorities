@@ -14,27 +14,30 @@
             android:textStyle="bold"
             android:maxLines="1"
             android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_weight=".30"
+            android:layout_width="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"
         android:layout_weight=".70"
-        android:layout_height="wrap_content">
+        android:layout_gravity="center"
+        android:layout_height="match_parent"
+        >
         <TextView
             android:id="@+id/tvViewTaskContent"
-            android:text="Task"
+            android:text="Task Name"
             android:textStyle="bold"
             android:maxLines="1"
-            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
             android:textAlignment="textEnd"
-            android:layout_gravity="end"
-            android:layout_width="0dp"
-            android:layout_weight=".70"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_height="wrap_content"
+            />
     </LinearLayout>
 
 
