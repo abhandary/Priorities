@@ -86,47 +86,6 @@ public class MainActivity extends AppCompatActivity implements EditFragment.OnFr
         startActivityForResult(intent, EDIT_TASK_REQUEST);
     }
 
-    public void onAddItem(View view) {
-    }
-
-    private void writeFile() {
-        File filesDir = getFilesDir();
-        File todoFile = new File(filesDir, "todo.txt");
-        try {
-            // items = new ArrayList<String>(FileUtils.readLines(todoFile);
-            FileUtils.writeLines(todoFile, items);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    private void writeUsingORM() {
-
-        int ix = 0;
-        for (TodoItem itemRow : items) {
-            itemRow.save();
-            ix+=1;
-        }
-    }
-
-    private void writeUsingORMAtPosition(int pos) {
-
-        TodoItem itemRow = items.get(pos);
-//        new TodoItem();
-//        itemRow.setIdentifier(pos);
-//        itemRow.setTaskName(items.get(pos));
-        itemRow.save();
-    }
-
-    private void removeUsingORMAtPosition(int pos) {
-
-        TodoItem itemRow = new TodoItem();
-        itemRow.setIdentifier(pos);
-//        itemRow.setTaskName(items.get(pos));
-        itemRow.delete();
-    }
-
-
     private void readUsingORM() {
         List<TodoItem> ormItems = SQLite.select().from(TodoItem.class).queryList();
         items.clear();

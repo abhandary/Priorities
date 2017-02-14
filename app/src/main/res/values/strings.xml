@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SimpleTodo</string>
+    <string name="app_name">Priorities</string>
     <string name="task_name_hint">Enter Task Name Here</string>
     <string name="task_notes_hint">Enter Notes Here</string>
     <string name="lbl_task_name">Task Name</string>
